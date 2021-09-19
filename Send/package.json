@@ -1,5 +1,5 @@
 {
-  "name": "sendtowals",
+  "name": "sendtowal",
   "version": "1.0.0",
   "description": "Module for send email to me",
   "main": "send.js",
