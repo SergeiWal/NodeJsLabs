@@ -1,6 +1,6 @@
 {
   "name": "sendtosergo",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Send mail to my account",
   "main": "send.js",
   "repository": {
