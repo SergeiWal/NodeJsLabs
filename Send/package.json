@@ -1,23 +1,15 @@
 {
-  "name": "sendtowal",
+  "name": "sendtosergo",
   "version": "1.0.0",
-  "description": "Module for send email to me",
+  "description": "Send mail to my account",
   "main": "send.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SergeiWal/NodeJsLabs.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SergeiWal/NodeJsLabs"
-  },
-  "keywords": [
-    "send",
-    "mail",
-    "sendmail",
-    "Lab6",
-    "Sergei",
-    "Walko"
-  ],
   "author": "Sergei Walko",
   "license": "ISC"
 }
