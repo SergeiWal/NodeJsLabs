@@ -1,0 +1,15 @@
+{
+  "name": "send",
+  "version": "1.0.0",
+  "description": "Module for send email to me",
+  "main": "send.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "send",
+    "mail"
+  ],
+  "author": "Sergei Walko",
+  "license": "ISC"
+}

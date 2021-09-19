@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <button onclick="getDataAboutMeFromServer()">GetData</button>
+        <div class="content"></div>
+      </div>
+    </div>
+
+    <script>
+      function getDataAboutMeFromServer() {
+        const httprequest = new XMLHttpRequest();
+
+        httprequest.onload = function () {
+          console.log(this.responseText);
+          document.querySelector(".content").innerHTML = this.responseText;
+        };
+
+        httprequest.open("GET", "http://localhost:5000/api/name");
+        httprequest.send();
+      }
+    </script>
+  </body>
+</html>

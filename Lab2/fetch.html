@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <button onclick="getDataAboutMeFromServer()">GetData</button>
+        <div class="content"></div>
+      </div>
+    </div>
+    <script>
+      async function getDataAboutMeFromServer() {
+        let data = await fetch("http://localhost:5000/api/name");
+        let response = await data.text();
+        document.querySelector(".content").innerHTML = response;
+      }
+    </script>
+  </body>
+</html>

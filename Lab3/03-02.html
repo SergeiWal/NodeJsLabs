@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03-02</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="data"></div>
+      <div class="finish_time"></div>
+    </div>
+    <script>
+      window.addEventListener("load", (event) => {
+        const startTime = new Date().getTime();
+        let lastTime = startTime;
+        for (let x = 2; x <= 20; ++x) {
+          fetch(`http://localhost:5000/fact?k=${x}`, { method: "GET" })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              const currentTime = new Date().getTime();
+              const element = document.querySelector(".data");
+              const node = document.createElement("p");
+              node.innerHTML = `${currentTime - startTime}-${data.k}/${
+                data.fact
+              }`;
+              element.appendChild(node);
+              if (currentTime > lastTime) {
+                lastTime = currentTime;
+                document.querySelector(".finish_time").innerHTML = `Finish: ${
+                  new Date().getTime() - startTime
+                }ms`;
+              }
+            });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lab4</h1>
+      <div class="form" action="">
+        <div class="form-get">
+          <div class="label">Get data from db</div>
+          <div class="get-button">
+            <button onclick="get()">GET</button>
+          </div>
+        </div>
+        <br />
+        <div class="form-post-put">
+          <div class="id row">
+            <label class="col-2">ID:</label>
+            <input type="number" class="col-3" id="id" />
+          </div>
+          <div class="name row">
+            <label class="col-2">Name:</label>
+            <input type="text" class="col-3" id="name" />
+          </div>
+          <div class="bday row">
+            <label class="col-2">Birth day:</label>
+            <input type="date" class="col-3" id="bday" />
+          </div>
+          <br />
+          <button class="post-button col-2" onclick="post()">POST</button>
+          <button class="put-button col-2" onclick="put()">PUT</button>
+        </div>
+        <br />
+        <div class="form-delete">
+          <div class="id"></div>
+          <button class="delete-button col-2" onclick="del()">DELETE</button>
+        </div>
+      </div>
+      <br />
+      <hr />
+      <div class="data"></div>
+    </div>
+    <script>
+      function get() {
+        fetch("http://localhost:5000/api/db", { method: "GET" })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const result = document.querySelector(".data");
+            result.innerHTML = "";
+            data.forEach((element) => {
+              result.innerHTML += `id: ${element.id} name: ${element.name} birth day: ${element.bday} <br/>`;
+            });
+          });
+      }
+
+      function post() {
+        const id = document.querySelector("#id").value;
+        const name = document.querySelector("#name").value;
+        const bday = document.querySelector("#bday").value;
+
+        fetch("http://localhost:5000/api/db", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ id, name, bday }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log("POST.data", data);
+            document.querySelector(
+              ".data"
+            ).innerHTML = `Post data: ${JSON.stringify(data)}`;
+          });
+      }
+
+      function put() {
+        const id = document.querySelector("#id").value;
+        const name = document.querySelector("#name").value;
+        const bday = document.querySelector("#bday").value;
+
+        fetch("http://localhost:5000/api/db", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ id, name, bday }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log("PUT.data", data);
+            document.querySelector(
+              ".data"
+            ).innerHTML = `Put data: ${JSON.stringify(data)}`;
+          });
+      }
+
+      function del() {
+        const id = document.querySelector("#id").value;
+
+        fetch(`http://localhost:5000/api/db?id=${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log("DELETE.data", data);
+            document.querySelector(
+              ".data"
+            ).innerHTML = `Delete data: ${JSON.stringify(data)}`;
+          });
+      }
+    </script>
+  </body>
+</html>
