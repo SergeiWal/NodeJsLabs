@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <h1>10-01</h1>
+        <button name="start" class="start_button" onclick="buttonHandler()">
+          StartWS
+        </button>
+        <div class="data"></div>
+      </div>
+    </div>
+    <script>
+      function buttonHandler() {
+        let n = 0;
+        const webSocket = new WebSocket("ws://localhost:4000/");
+        const dataElem = document.querySelector(".data");
+        let handler;
+        webSocket.onopen = () => {
+          handler = setInterval(() => {
+            webSocket.send(`10-01-client: ${++n}`);
+          }, 3000);
+        };
+        webSocket.onmessage = (event) => {
+          dataElem.innerHTML = event.data;
+        };
+
+        webSocket.onclose = (event) => {
+          if (event.wasClean) {
+            console.log("Connection have closed clean");
+          } else {
+            console.log("Connection is interupted");
+          }
+        };
+
+        setTimeout(() => {
+          clearInterval(handler);
+          webSocket.close();
+        }, 25000);
+      }
+    </script>
+  </body>
+</html>
